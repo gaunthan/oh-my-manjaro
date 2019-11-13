@@ -11,3 +11,17 @@ sudo pacman -S --noconfirm \
     google-chrome wps-office netease-cloud-music shadowsocks-qt5 \
     code tilix octave \
     wqy-bitmapfont wqy-microhei wqy-zenhei ttf-wps-fonts
+
+# Install fcitx input method
+sudo pacman -S --noconfirm \
+    fcitx fcitx-im fcitx-configtool fctix-rime
+
+# Set up config file
+CONFIG_FILE=/etc/environment
+grep "GTK_IM_MODULE" $CONFIG_FILE -q
+if [[ "$?" != "0" ]]; then
+    echo "
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=\"@im=fcitx\"" | sudo tee -a $CONFIG_FILE
+fi

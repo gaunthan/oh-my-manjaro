@@ -9,7 +9,7 @@ sudo pacman -Syyu
 # Now install useful softwares
 sudo pacman -S --noconfirm \
     google-chrome wps-office netease-cloud-music shadowsocks-qt5 \
-    code tilix octave \
+    code tilix octave zeal \
     wqy-bitmapfont wqy-microhei wqy-zenhei ttf-wps-fonts
 
 # Install fcitx input method

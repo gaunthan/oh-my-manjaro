@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This script will enable China mirrors and add archlinuxcn, antergos repos
+# This script will enable China mirrors and add archlinuxcn, antergos repos.
 # Chinese users are recommended to use.
 
 # Use China mirrors

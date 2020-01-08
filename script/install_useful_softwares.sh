@@ -16,7 +16,7 @@ sudo pacman -S --noconfirm \
 sudo pacman -S --noconfirm \
     fcitx fcitx-im fcitx-configtool fctix-rime
 
-# Set up config file
+# Setup config file for fcitx
 CONFIG_FILE=/etc/environment
 grep "GTK_IM_MODULE" $CONFIG_FILE -q
 if [[ "$?" != "0" ]]; then

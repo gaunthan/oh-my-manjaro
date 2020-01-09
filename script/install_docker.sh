@@ -27,4 +27,5 @@ if [[ "$?" = "0" ]]; then
 else
     echo "Oops! You may need to log out and log back in again"\
 	 "to be able to run docker commands!"
+    echo "If it still doesn't work, you may need to reboot your system!"
 fi

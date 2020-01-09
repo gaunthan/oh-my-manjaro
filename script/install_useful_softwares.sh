@@ -25,3 +25,10 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=\"@im=fcitx\"" | sudo tee -a $CONFIG_FILE
 fi
+
+# Install package managers
+sudo pacman -S --noconfirm yaourt
+
+# Install searching tools
+sudo yaourt -S --noconfirm mlocate
+sudo updatedb

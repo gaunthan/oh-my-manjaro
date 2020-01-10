@@ -1,0 +1,4 @@
+https://registry.docker-cn.com
+https://dockerhub.azk8s.cn
+https://mirror.ccs.tencentyun.com
+https://reg-mirror.qiniu.com

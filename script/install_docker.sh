@@ -7,27 +7,24 @@ sudo pacman -S docker --noconfirm
 sudo systemctl enable docker
 sudo systemctl start docker
 
-# Use docker-cn mirror if at Asia
+# Add China mirrors if at Asia
 curl http://ip-api.com/line?fields=timezone 2> /dev/null | grep -qi Asia
 if [[ "$?" = "0" ]]; then
-    echo "Use registry mirror: docker-cn"
+    echo -n "Adding China mirrors..."
 
-    CONFIG_STR='{"registry-mirrors":["https://registry.docker-cn.com"]}'
-    CONFIG_FILE="/etc/docker/daemon.json"
+    DOCKER_CONFIG_FILE="/etc/docker/daemon.json"
 
     # Create config file if not exits
-    if [[ ! -f ${CONFIG_FILE} ]]; then
-        sudo touch ${CONFIG_FILE}
+    if [[ ! -f ${DOCKER_CONFIG_FILE} ]]; then
+        echo {} | sudo tee ${DOCKER_CONFIG_FILE} > /dev/null
     fi
 
-    # Add mirror if not exits
-    grep -qi "docker-cn" ${CONFIG_FILE}
-    if [[ "$?" != "0" ]]; then
-	echo "Adding docker mirror to ${CONFIG_FILE}"
-        echo ${CONFIG_STR} | sudo tee -a ${CONFIG_FILE} &> /dev/null
-    fi
+    # Add mirrors
+    chmod +x add_docker_mirrors.py
+    sudo ./add_docker_mirrors.py ../config/docker-china-mirrors.txt \
+            --config_file ${DOCKER_CONFIG_FILE}
 
-    echo "Congrads! Mirror is added!"
+    echo "done"
 fi
 
 # Create docker group if not exists

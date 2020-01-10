@@ -32,3 +32,6 @@ sudo pacman -S --noconfirm yaourt
 # Install searching tools
 sudo yaourt -S --noconfirm mlocate
 sudo updatedb
+
+# Install python pip tool
+sudo pacman -S --noconfirm python-pip

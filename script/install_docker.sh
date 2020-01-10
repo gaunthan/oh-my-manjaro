@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Install docker
-sudo pacman -S docker --noconfirm
+sudo pacman -S --noconfirm docker
 
 # Enable docker on system booting
 sudo systemctl enable docker
@@ -19,10 +19,17 @@ if [[ "$?" = "0" ]]; then
         echo {} | sudo tee ${DOCKER_CONFIG_FILE} > /dev/null
     fi
 
-    # Add mirrors
-    chmod +x add_docker_mirrors.py
-    sudo ./add_docker_mirrors.py ../config/docker-china-mirrors.txt \
-            --config_file ${DOCKER_CONFIG_FILE}
+    # Download helper script and config file from github
+    SOURCE_URL='https://raw.githubusercontent.com/gaunthan/oh-my-manjaro/master'
+    HELPER_SCRIPT='add_docker_mirrors.py'
+    MIRROR_FILE='docker-china-mirrors.txt'
+    TARGET='/tmp'
+    wget -q ${SOURCE_URL}/script/${HELPER_SCRIPT} -O ${TARGET}/${HELPER_SCRIPT}
+    wget -q ${SOURCE_URL}/config/${MIRROR_FILE} -O ${TARGET}/${MIRROR_FILE}
+
+    # Add mirrors by config file
+    chmod +x ${TARGET}/${HELPER_SCRIPT}
+    sudo ${TARGET}/${HELPER_SCRIPT} ${TARGET}/${MIRROR_FILE} --config_file ${DOCKER_CONFIG_FILE}
 
     echo "done"
 fi
